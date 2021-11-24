@@ -8,20 +8,17 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Index;
 import javax.persistence.Table;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+
 import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
 
 @Entity
-@Data
-@RequiredArgsConstructor
-@NoArgsConstructor
+
 @Table(name = "user", indexes = @Index(name = "indx_email", columnList = "user_email", unique = true))
 public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     @NonNull
     @Column(name = "user_email", nullable = false, length = 50)
     private String email;
@@ -32,14 +29,51 @@ public class User implements Serializable {
     @Column(name = "user_name", nullable = false, length = 80)
     private String name;
 
-    public User(String email2, String password2, String string) {
+    public User(Integer id, String email, String password, String name) {
+        this.id = id;
+        this.email = email;
+        this.password = password;
+        this.name = name;
     }
 
-    public Object getId() {
-        return null;
+    public User(String email, String password, String name) {
+        this.email = email;
+        this.password = password;
+        this.name = name;
+    }
+
+    public User() {
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getEmail() {
-        return null;
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
